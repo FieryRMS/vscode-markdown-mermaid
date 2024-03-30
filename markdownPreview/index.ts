@@ -1,4 +1,4 @@
-import mermaid from 'mermaid';
+import mermaid, { MermaidConfig } from 'mermaid';
 import { renderMermaidBlocksInElement } from './mermaid';
 
 function init() {
@@ -7,11 +7,12 @@ function init() {
     const lightModeTheme = configSpan?.dataset.lightModeTheme;
 
     const config = {
+        legacyMathML: true,
         startOnLoad: false,
         theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
             ? darkModeTheme ?? 'dark'
             : lightModeTheme ?? 'default'
-    };
+    } as MermaidConfig;
     mermaid.initialize(config);
 
     renderMermaidBlocksInElement(document.body, (mermaidContainer, content) => {
